@@ -1,0 +1,207 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    /* Romantic pink-blue gradient background */
+    background: linear-gradient(135deg, #ffe6f2 0%, #ffb6d5 40%, #b3e0ff 100%);
+}
+
+h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+}
+
+.love-btn {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #ff6a88 0%, #ff99ac 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    box-shadow: 0 4px 12px rgba(255, 105, 135, 0.2);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    z-index: 10;
+}
+
+.love-btn:hover {
+    background: linear-gradient(90deg, #ff99ac 0%, #ff6a88 100%);
+    transform: translateX(-50%) scale(1.05);
+}
+
+.envelope-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.envelope {
+    position: relative;
+    width: 360px;         /* Increased width */
+    height: 210px;        /* Increased height */
+    background: #d2a679;
+    border-radius: 32px 32px 24px 24px;
+    box-shadow: 0 8px 24px rgba(185, 122, 87, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    transition: box-shadow 0.3s, transform 0.2s;
+    perspective: 800px;
+}
+
+.envelope:hover {
+    box-shadow: 0 12px 32px rgba(185, 122, 87, 0.25);
+    transform: scale(1.03);
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-origin: bottom center;
+    transition: transform 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+    will-change: transform;
+    z-index: 2;
+    background: transparent;
+    overflow: visible; /* Allow stamp to overflow */
+}
+
+.flap-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;         /* Increased flap SVG height */
+    z-index: 1;
+    pointer-events: none;
+}
+
+.stamp-heart {
+    position: absolute; /* Use absolute instead of fixed */
+    left: 50%;
+    top: 82px; /* Place at the tip of the triangle, adjust as needed */
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    background: #ffe6f2; /* Light shade of pink */
+    border-radius: 50%;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(255, 105, 135, 0.15);
+    z-index: 10;
+    border: 2px solid #ffe6f2;
+    pointer-events: none;
+}
+
+.envelope-body {
+    width: 100%;
+    height: 120px;        /* Increased body height */
+    background: #d2a679;
+    border-radius: 0 0 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.card {
+    width: 90%;
+    min-height: 100px;
+    background: #fff0f6;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(255, 105, 135, 0.15);
+    padding: 28px 18px;
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #d72660;
+    margin-top: 10px;
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+.envelope.open .envelope-flap {
+    transform: rotateX(-120deg);
+}
+
+.envelope.open .envelope-body,
+.envelope.open .stamp-heart,
+.envelope.open .open-text {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+}
+
+.envelope.open .card {
+    transform: translate(-50%, -40px) scaleY(1);
+    opacity: 1;
+}
+
+/* Floating hearts animation */
+@keyframes floatHearts {
+    0% { transform: translateY(0) scale(1);}
+    100% { transform: translateY(-100vh) scale(1.2);}
+}
+
+.heart {
+    position: fixed;
+    bottom: -40px;
+    font-size: 2rem;
+    color: #ff6a88;
+    animation: floatHearts 6s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Responsive envelope and card */
+@media (max-width: 500px) {
+    .envelope {
+        width: 95vw;
+        height: 140px;
+    }
+    .envelope-flap {
+        height: 50px;
+    }
+    .flap-svg {
+        height: 50px;
+    }
+    .stamp-heart {
+        font-size: 1.5rem;
+        padding: 7px;
+    }
+    .open-text {
+        font-size: 1rem;
+        top: 38px;
+    }
+    .card {
+        padding: 16px 8px;
+    }
+}
