@@ -72,6 +72,21 @@ const closeBtn = document.getElementById('close-card');
 const playBtn = document.getElementById('play-btn');
 const bgAudio = document.getElementById('bg-audio');
 
+let isPlaying = false;
+
+playBtn.onclick = function() {
+    if (!isPlaying) {
+        bgAudio.play();
+        playBtn.textContent = 'Yayyy!😋(Tap to stop music😔)';
+        isPlaying = true;
+    } else {
+        bgAudio.pause();
+        bgAudio.currentTime = 0;
+        playBtn.textContent = '❤️ Tap to play music (please) ❤️';
+        isPlaying = false;
+    }
+};
+
 // Open envelope and show card
 envelope.onclick = function() {
     envelope.classList.add('open');
@@ -90,11 +105,6 @@ cardModal.onclick = function(e) {
         cardModal.classList.remove('show');
         envelope.classList.remove('open');
     }
-};
-
-playBtn.onclick = function() {
-    bgAudio.play();
-    playBtn.textContent = 'Yayyy!';
 };
 
 // Remove old floating hearts, sparkles, balloons, stars generators
